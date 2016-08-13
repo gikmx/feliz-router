@@ -18,6 +18,14 @@ preferred [feliz-server](https://github.com/search?q=org%3Agikmx+feliz-server) f
 
 ## API Documentation (WIP)
 
+The default configuration options.
+
+<a name="module_Configuration.path"></a>
+
+### Configuration.path : <code>object</code>
+Enable the bundle path
+
+**Kind**: static __required__ property of <code>[Configuration](#module_Configuration)</code>  
 
 ---
 
