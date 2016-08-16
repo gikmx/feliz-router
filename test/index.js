@@ -1,53 +1,79 @@
 'use strict';
 
-const Tape  = require('tape');
-const Feliz = require('feliz');
+const PATH = require('path');
+const Test = require('feliz.test');
+const Router = require('../lib/router');
 
-const router     = require('../lib/router');
-const tests      = require('./cases');
-const observable = Feliz.observable;
+const path           = {root: PATH.join(__dirname, 'app')};
+path.empty           = PATH.join(path.root, 'empty');
+path.routesEmpty     = PATH.join(path.root, 'routes-empty');
+path.routesArray     = PATH.join(path.root, 'routes-array');
+path.bundle404       = PATH.join(path.root, 'bundle-404');
+path.bundleFile      = PATH.join(path.root, 'bundle-file');
+path.bundleFileEmpty = PATH.join(path.root, 'bundle-file-empty');
+path.bundleDir       = PATH.join(path.root, 'bundle-dir');
+path.bundleDirEmpty  = PATH.join(path.root, 'bundle-dir-empty');
+path.methodInvalid   = PATH.join(path.root, 'method-invalid');
+path.methodUnknown   = PATH.join(path.root, 'method-unknown');
 
-const Conf = {
-    plugins: [router],
-    // Tape executable (mainModule) doesn't have an extension,
-    // So feliz doesn't get one by default. fixed it.
-    path : { ext: { type:'extname', args:[__filename] } }
+const conf = {
+    plugins: [Router]
 };
 
-Tape('The returned feliz observable', t => {
-
-    const test$ = tests.stream().concatMap(test => {
-        const conf = Object.assign({}, test.conf, Conf);
-        const feliz$ =  new Feliz(conf);
-
-        return feliz$
-            .catch(err => observable.of(err))
-            .map(out => Object.assign({out}, test))
-    });
-
-    test$.subscribe(onInstance, onError, () => t.end());
-
-    function onInstance(test){
-        const t1 = test.out instanceof Error;
-        const t2 = test.out.constructor.name === 'Feliz';
-        const m1 = `should ${test.pass? 'not':''} stream error when ${test.desc}`;
-        const m2 = `should ${test.pass? '':'not'} resolve to instance when ${test.desc}`;
-        if (test.pass){
-            // should not stream errors and return a feliz instance
-            t.equal(t1, false, m1);
-            t.equal(t2, true, m2);
-            // unexpected error
-            if (t1 !== false) console.error(test.out);
-        } else {
-            // should stream and error and not return a feliz instance
-            t.equal(t1, true, m1);
-            t.equal(t2, false, m2);
+const test$ = Test([{
+    desc : 'The feliz instance when using the router plugin',
+    data : [
+        {
+            desc: 'no route file is found',
+            conf: Object.assign({ root:path.empty }, conf),
+            pass: false
+        },
+        {
+            desc: 'an empty route file is found',
+            conf: Object.assign({ root:path.routesEmpty }, conf),
+            pass: true
+        },
+        {
+            desc: 'an non-object is used as routes',
+            conf: Object.assign({ root: path.routesArray }, conf),
+            pass: false
+        },
+        {
+            desc: 'an unexisting bundle is declared',
+            conf: Object.assign({ root: path.bundle404 }, conf),
+            pass: false
+        },
+        {
+            desc: 'an existent invalid bundle (file) is declared',
+            conf: Object.assign({ root: path.bundleFileEmpty }, conf),
+            pass: false
+        },
+        {
+            desc: 'an existent valid bundle (file) is declared',
+            conf: Object.assign({ root: path.bundleFile }, conf),
+            pass: true
+        },
+        {
+            desc: 'an existent invalid bundle bundle (dir) is declared',
+            conf: Object.assign({ root: path.bundleDirEmpty }, conf),
+            pass: false
+        },
+        {
+            desc: 'an existent valid bundle (dir) is declared',
+            conf: Object.assign({ root: path.bundleDir }, conf),
+            pass: true
+        },
+        {
+            desc: 'an existent valid bundle with invalid method is declared',
+            conf: Object.assign({ root: path.methodInvalid }, conf),
+            pass: false
+        },
+        {
+            desc: 'an existent valid bundle with unknown method is declared',
+            conf: Object.assign({ root: path.methodUnknown }, conf),
+            pass: false
         }
-        if (test.cbak) test.cbak(t, test);
-    };
+    ]
+}]);
 
-    function onError(error){
-        t.fail('should never show this message while testing');
-        console.error(error);
-    };
-});
+test$.subscribe();
