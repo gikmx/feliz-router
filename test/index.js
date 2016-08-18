@@ -22,7 +22,7 @@ const conf = {
 
 const test$ = Test([{
     desc : 'The feliz instance when using the router plugin',
-    data : [
+    test : [
         {
             desc: 'no route file is found',
             conf: Object.assign({ root:path.empty }, conf),
