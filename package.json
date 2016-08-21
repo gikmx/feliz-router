@@ -1,7 +1,7 @@
 {
   "name": "feliz-router",
   "version": "0.0.4",
-  "description": "",
+  "description": "A routing plugin for feliz.js",
   "main": "lib/router.js",
   "author": "Héctor Menéndez <etor@gik.mx>",
   "license": "MIT",
@@ -14,21 +14,23 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gikmx/feliz-server-hapi"
+    "url": "https://github.com/gikmx/feliz-router"
   },
   "bugs": {
-    "url": "https://github.com/gikmx/feliz-server-hapi/issues"
+    "url": "https://github.com/gikmx/feliz-router/issues"
   },
   "engines": {
     "node": ">=6.2.0"
   },
   "scripts": {
-    "start": "npm-watch",
-    "docs": "jsdoc2md 'lib/**/*.js' --template ./template.hbs > README.md",
-    "test": "tape ./test/index.js | tap-spec",
+    "start": "nodemon ./test -x 'npm run docs && npm run debug -s' -w ./lib -w ./test | tap-spec",
+    "docs": "jsdoc2md -t ./template.hbs 'lib/**/*.js' > README.md",
+    "test": "tape ./test | tap-spec",
+    "debug": "node-debug --cli --no-debug-brk --debug-port 5900 --web-port 9900 --save-live-edit --no-preload",
+    "debug:watch": "nodemon ./test -x 'npm run debug -s' -w ./lib -w ./test | tap-spec",
     "cover": "npm run cover:stats && npm run cover:send",
     "cover:check": "npm run cover:stats && istanbul check-coverage",
-    "cover:stats": "istanbul cover tape -- ./test/index.js",
+    "cover:stats": "istanbul cover tape -- ./test",
     "cover:send": "cat ./coverage/lcov.info | coveralls",
     "precommit": "npm test && npm run cover:check && npm run docs && git add --force README.md && feliz.hooks pre-commit"
   },
@@ -40,25 +42,6 @@
     "husky": "^0.11.5",
     "istanbul": "^0.4.4",
     "jsdoc-to-markdown": "^1.3.6",
-    "npm-watch": "git://github.com/hectormenendez/npm-watch.git",
     "tap-spec": "^4.1.1"
-  },
-  "watch": {
-    "test": {
-      "patterns": [
-        "lib",
-        "test"
-      ],
-      "extensions": "js",
-      "inherit": true
-    },
-    "docs": {
-      "patterns": [
-        "lib",
-        "template.hbs"
-      ],
-      "extensions": "js",
-      "inherit": true
-    }
   }
 }
