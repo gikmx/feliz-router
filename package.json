@@ -1,6 +1,6 @@
 {
   "name": "feliz-router",
-  "version": "0.0.6-beta",
+  "version": "0.0.5",
   "description": "A routing plugin for feliz.js",
   "main": "lib/router.js",
   "author": "Héctor Menéndez <etor@gik.mx>",
@@ -32,12 +32,12 @@
     "cover:check": "npm run cover:stats && istanbul check-coverage",
     "cover:stats": "istanbul cover tape -- ./test",
     "cover:send": "cat ./coverage/lcov.info | coveralls",
-    "precommit": "npm test && npm run cover:check && npm run docs && git add --force README.md && feliz.hooks pre-commit"
+    "postversion": "git add package.json",
+    "precommit": "npm test && npm run cover:check && npm run docs && git add --force README.md && npm version patch --no-git-tag-version"
   },
   "dependencies": {},
   "devDependencies": {
     "coveralls": "^2.11.12",
-    "feliz.hooks": "0.0.5",
     "feliz.test": "0.0.13-beta",
     "husky": "^0.11.5",
     "istanbul": "^0.4.4",
