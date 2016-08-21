@@ -1,6 +1,6 @@
 {
   "name": "feliz-router",
-  "version": "0.0.5",
+  "version": "0.0.6-beta",
   "description": "A routing plugin for feliz.js",
   "main": "lib/router.js",
   "author": "Héctor Menéndez <etor@gik.mx>",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "coveralls": "^2.11.12",
     "feliz.hooks": "0.0.5",
-    "feliz.test": "0.0.9",
+    "feliz.test": "0.0.13-beta",
     "husky": "^0.11.5",
     "istanbul": "^0.4.4",
     "jsdoc-to-markdown": "^1.3.6",
