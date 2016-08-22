@@ -1,6 +1,6 @@
 {
   "name": "feliz-router",
-  "version": "0.1.0-beta.6",
+  "version": "0.1.0-beta.7",
   "description": "A routing plugin for feliz.js projects",
   "main": "lib/router.js",
   "author": "Héctor Menéndez <etor@gik.mx>",
