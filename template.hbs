@@ -1,11 +1,11 @@
 [![Build
-Status](https://travis-ci.org/gikmx/feliz-router.svg?branch=master)](https://travis-ci.org/gikmx/feliz-router)
+Status](https://travis-ci.org/gikmx/feliz-server-router.svg?branch=master)](https://travis-ci.org/gikmx/feliz-server-router)
 [![Coverage
-Status](https://coveralls.io/repos/github/gikmx/feliz-router/badge.svg?branch=master)](https://coveralls.io/github/gikmx/feliz-router?branch=master)
+Status](https://coveralls.io/repos/github/gikmx/feliz-server-router/badge.svg?branch=master)](https://coveralls.io/github/gikmx/feliz-server-router?branch=master)
 <br>
-[![NPM](https://nodei.co/npm/feliz-router.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/feliz-router/)
+[![NPM](https://nodei.co/npm/feliz-server-router.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/feliz-server-router/)
 
-# feliz-router
+# feliz-server-router
 A plugin for [hapi.js](http://github.com/gikmx/feliz) that enables routing for your
 preferred [feliz-server](https://github.com/search?q=org%3Agikmx+feliz-server) flavor.
 

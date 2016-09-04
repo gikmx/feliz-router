@@ -1,5 +1,5 @@
 {
-  "name": "feliz-router",
+  "name": "feliz-server-router",
   "version": "0.1.0-beta.8",
   "description": "A routing plugin for feliz.js projects",
   "main": "lib/router.js",
@@ -14,10 +14,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/gikmx/feliz-router"
+    "url": "https://github.com/gikmx/feliz-server-router"
   },
   "bugs": {
-    "url": "https://github.com/gikmx/feliz-router/issues"
+    "url": "https://github.com/gikmx/feliz-server-router/issues"
   },
   "engines": {
     "node": ">=6.2.0"
