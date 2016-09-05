@@ -20,12 +20,12 @@ preferred [feliz-server](https://github.com/search?q=org%3Agikmx+feliz-server) f
 
 The default configuration options.
 
-<a name="module_Configuration.path"></a>
+<a name="module_Configuration..path"></a>
 
-### Configuration.path : <code>object</code>
+### Configuration~path : <code>object</code>
 Enable the bundle path
 
-**Kind**: static __required__ property of <code>[Configuration](#module_Configuration)</code>  
+**Kind**: inner __required__ property of <code>[Configuration](#module_Configuration)</code>  
 
 ---
 
